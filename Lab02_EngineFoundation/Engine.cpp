@@ -22,27 +22,51 @@ void Engine::Initialize()
 
 	if (document.hasKey("Engine"))
 	{
-		std::cout << "Engine: " << document["Engine"].ToString() << "\n";
+		std::cout << "Found Engine..." << std::endl;
 		json::JSON engineSettings = document["Engine"];
 
 		if (engineSettings.hasKey("DefaultFile"))
 		{
 			std::string DefaultFile = engineSettings["DefaultFile"].ToString();
-			std::cout << "DefaultFile: " << DefaultFile << "\n";
+			std::cout << "Found DefaultFile: " << DefaultFile << std::endl;
 
-			//sceneManager->AddScene();
+			//Load DefaultFile
+			std::ifstream levelStream(DefaultFile);
+			std::string levelStr((std::istreambuf_iterator<char>(levelStream)), std::istreambuf_iterator<char>());
+			json::JSON levelFile = json::JSON::Load(levelStr);
+
+			if (levelFile.hasKey("SceneManager"))
+			{
+				std::cout << "Found SceneManager..." << std::endl;
+				json::JSON scenes = levelFile["SceneManager"];
+				
+				//sceneManager->Load(scenes);
+
+				for (auto& scene : scenes.ArrayRange())
+				{
+					if (scene.hasKey("name"))
+					{
+						std::string sceneName = scene["name"].ToString();
+						std::cout << "Found Scene Name: " << sceneName << std::endl;
+					}
+					if (scene.hasKey("Entities"))
+					{
+						
+					}
+				}
+			}
 		}
 	}
 
 	if (document.hasKey("RenderSystem"))
 	{
-		std::cout << "RenderSystem: " << document["RenderSystem"].ToString() << "\n";
+		std::cout << "Found RenderSystem: " << document["RenderSystem"].ToString() << std::endl;
 		json::JSON renderSystemSettings = document["RenderSystem"];
 
 		renderSystem->Initialize(renderSystemSettings);
 	}
 
-	std::cout << "Engine Initialized" << std::endl;
+	std::cout << "Engine Initialized \n" << std::endl ;
 }
 
 void Engine::Destroy()

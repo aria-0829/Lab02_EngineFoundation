@@ -4,6 +4,8 @@
 
 #include "Scene.h"
 #include <list>
+#include "json.hpp"
+#include <fstream>
 
 class SceneManager
 {
@@ -19,7 +21,7 @@ public:
 	void Update();
 	void AddScene(Scene* _scene);
 	void RemoveScene(Scene* _scene);
-	void Load();
+	void Load(json::JSON& _json);
 };
 
 #endif // !_SCENEMANAGER_H_

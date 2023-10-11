@@ -18,42 +18,11 @@ void Engine::Initialize()
 	//Load GameSettings.json
 	std::ifstream inputStream("GameSettings.json");
 	std::string str((std::istreambuf_iterator<char>(inputStream)), std::istreambuf_iterator<char>());
-	json::JSON document = json::JSON::Load(str);
+	json::JSON documentData = json::JSON::Load(str);
 
-	if (document.hasKey("Engine"))
-	{
-		std::cout << "HasKey Engine..." << std::endl;
-		json::JSON engineSettings = document["Engine"];
+	Load(documentData);
 
-		if (engineSettings.hasKey("DefaultFile"))
-		{
-			std::string DefaultFile = engineSettings["DefaultFile"].ToString();
-			std::cout << "DefaultFile: " << DefaultFile << std::endl << std::endl;
-
-			//Load DefaultFile
-			std::ifstream levelStream(DefaultFile);
-			std::string levelStr((std::istreambuf_iterator<char>(levelStream)), std::istreambuf_iterator<char>());
-			json::JSON levelFile = json::JSON::Load(levelStr);
-
-			if (levelFile.hasKey("SceneManager"))
-			{
-				std::cout << "HasKey SceneManager..." << std::endl;
-				json::JSON sceneManagerData = levelFile["SceneManager"];
-				
-				sceneManager->Load(sceneManagerData);
-			}
-		}
-	}
-
-	if (document.hasKey("RenderSystem"))
-	{
-		std::cout << "HasKey RenderSystem: " << std::endl;
-		json::JSON renderSystemSettings = document["RenderSystem"];
-
-		renderSystem->Initialize(renderSystemSettings);
-	}
-
-	std::cout << "Engine Initialized \n" << std::endl ;
+	std::cout << "Engine Initialized \n" << std::endl;
 }
 
 void Engine::Destroy()
@@ -70,7 +39,28 @@ void Engine::GameLoop()
 	}
 }
 
-void Engine::Load()
+void Engine::Load(json::JSON& _documentData)
 {
-	std::cout << "Loaded" << std::endl;
+	renderSystem->Load(_documentData);
+
+	if (_documentData.hasKey("Engine"))
+	{
+		std::cout << "HasKey Engine..." << std::endl;
+		json::JSON engineSettings = _documentData["Engine"];
+
+		if (engineSettings.hasKey("DefaultFile"))
+		{
+			std::string DefaultFile = engineSettings["DefaultFile"].ToString();
+			std::cout << "DefaultFile: " << DefaultFile << std::endl << std::endl;
+
+			//Load DefaultFile
+			std::ifstream levelStream(DefaultFile);
+			std::string levelStr((std::istreambuf_iterator<char>(levelStream)), std::istreambuf_iterator<char>());
+			json::JSON levelData = json::JSON::Load(levelStr);
+
+			sceneManager->Load(levelData);
+		}
+	}
+	
+	std::cout << "Engine Load Complete" << std::endl;
 }

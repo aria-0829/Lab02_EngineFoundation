@@ -17,10 +17,10 @@ public:
 	RenderSystem();
 	~RenderSystem();
 
-	void Initialize(json::JSON& _renderSystemSettings);
+	void Initialize();
 	void Destroy();
 	void Update();
-	void Load();
+	void Load(json::JSON& _documentData);
 };
 
 #endif // !_RENDERSYSTEM_H_

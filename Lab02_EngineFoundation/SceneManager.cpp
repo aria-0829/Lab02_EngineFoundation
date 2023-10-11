@@ -39,15 +39,21 @@ void SceneManager::RemoveScene(Scene* _scene)
 	std::cout << "Scene Removed from SceneManager" << std::endl;
 }
 
-void SceneManager::Load(json::JSON& _sceneManagerData)
+void SceneManager::Load(json::JSON& _levelData)
 {
-	//Load DefaultFile
-	for (auto& sceneData : _sceneManagerData.ArrayRange())
+	if (_levelData.hasKey("SceneManager"))
 	{
-		Scene* scene = new Scene();
-		scene->Load(sceneData);
-		AddScene(scene);
+		std::cout << "HasKey SceneManager..." << std::endl;
+		json::JSON sceneManagerData = _levelData["SceneManager"];
+
+		for (auto& sceneData : sceneManagerData.ArrayRange())
+		{
+			Scene* scene = new Scene();
+			scene->Load(sceneData);
+			AddScene(scene);
+		}
 	}
+	
 
 	std::cout << "Scene Manager Data Load Complete." << std::endl << std::endl;
 }

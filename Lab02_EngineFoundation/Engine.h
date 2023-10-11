@@ -22,7 +22,7 @@ public:
 	void Initialize();
 	void Destroy();
 	void GameLoop();
-	void Load();
+	void Load(json::JSON& _documentData);
 };
 
 #endif // !_ENGINE_H_

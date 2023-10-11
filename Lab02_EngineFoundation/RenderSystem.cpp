@@ -14,34 +14,9 @@ RenderSystem::~RenderSystem()
 	std::cout << "RenderSystem Destroyed \n" << std::endl;
 }
 
-void RenderSystem::Initialize(json::JSON& _renderSystemSettings)
+void RenderSystem::Initialize()
 {
-	//Load the appropriate data
-	if (_renderSystemSettings.hasKey("Name"))
-	{
-		Name = _renderSystemSettings["Name"].ToString();
-		std::cout << "Name: " << Name << std::endl;
-	}
-
-	if (_renderSystemSettings.hasKey("width"))
-	{
-		RenderSystem::width = _renderSystemSettings["width"].ToInt();
-		std::cout << "width: " << RenderSystem::width << std::endl;
-	}
-
-	if (_renderSystemSettings.hasKey("height"))
-	{
-		RenderSystem::height = _renderSystemSettings["height"].ToInt();
-		std::cout << "height: " << RenderSystem::height << std::endl;
-	}
-
-	if (_renderSystemSettings.hasKey("fullscreen"))
-	{
-		RenderSystem::fullscreen = _renderSystemSettings["fullscreen"].ToBool();
-		std::cout << "fullscreen: " << RenderSystem::fullscreen << std::endl;
-	}
-
-	//create a render window to be used based off the size in the settings
+	//Create a render window to be used based off the size in the settings
 	std::cout << "Creating a render window \n" << std::endl;
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
@@ -79,7 +54,37 @@ void RenderSystem::Update()
 	std::cout << "Render System Updated" << std::endl;
 }
 
-void RenderSystem::Load()
+void RenderSystem::Load(json::JSON& _documentData)
 {	
-	std::cout << "Loaded" << std::endl;
+	if (_documentData.hasKey("RenderSystem"))
+	{
+		std::cout << "HasKey RenderSystem: " << std::endl;
+		json::JSON renderSystemSettings = _documentData["RenderSystem"];
+
+		if (renderSystemSettings.hasKey("Name"))
+		{
+			Name = renderSystemSettings["Name"].ToString();
+			std::cout << "Name: " << Name << std::endl;
+		}
+
+		if (renderSystemSettings.hasKey("width"))
+		{
+			RenderSystem::width = renderSystemSettings["width"].ToInt();
+			std::cout << "width: " << RenderSystem::width << std::endl;
+		}
+
+		if (renderSystemSettings.hasKey("height"))
+		{
+			RenderSystem::height = renderSystemSettings["height"].ToInt();
+			std::cout << "height: " << RenderSystem::height << std::endl;
+		}
+
+		if (renderSystemSettings.hasKey("fullscreen"))
+		{
+			RenderSystem::fullscreen = renderSystemSettings["fullscreen"].ToBool();
+			std::cout << "fullscreen: " << RenderSystem::fullscreen << std::endl;
+		}
+	}
+
+	std::cout << "RenderSystem Load Complete" << std::endl;
 }

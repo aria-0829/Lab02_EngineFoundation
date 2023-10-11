@@ -52,7 +52,7 @@ void Entity::Load(json::JSON& _entityData)
 	}
 	if (_entityData.hasKey("Components"))
 	{
-		std::cout << "Found Components..." << std::endl;
+		std::cout << "HasKey Components..." << std::endl;
 		json::JSON components = _entityData["Components"];
 
 		for (auto& componentData : components.ArrayRange())

@@ -4,18 +4,18 @@
 
 SceneManager::SceneManager()
 {
-	std::cout << "SceneManager Created" << std::endl;
+	std::cout << "SceneManager Created \n" << std::endl;
 }
 
 SceneManager::~SceneManager()
 {
-	std::cout << "SceneManager Destroyed" << std::endl;
+	std::cout << "SceneManager Destroyed \n" << std::endl;
 }
 
 void SceneManager::Initialize()
 {
 	
-	std::cout << "SceneManager Initialized" << std::endl;
+	std::cout << "SceneManager Initialized \n" << std::endl;
 }
 
 void SceneManager::Destroy()

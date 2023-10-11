@@ -6,12 +6,12 @@
 
 RenderSystem::RenderSystem()
 {
-	std::cout << "RenderSystem Created" << std::endl;
+	std::cout << "RenderSystem Created \n" << std::endl;
 }
 
 RenderSystem::~RenderSystem()
 {
-	std::cout << "RenderSystem Destroyed" << std::endl;
+	std::cout << "RenderSystem Destroyed \n" << std::endl;
 }
 
 void RenderSystem::Initialize(json::JSON& _json)
@@ -20,28 +20,29 @@ void RenderSystem::Initialize(json::JSON& _json)
 	if (_json.hasKey("Name"))
 	{
 		Name = _json["Name"].ToString();
-		std::cout << "Found Name: " << Name << std::endl;
+		std::cout << "Name: " << Name << std::endl;
 	}
 
 	if (_json.hasKey("width"))
 	{
 		RenderSystem::width = _json["width"].ToInt();
-		std::cout << "Found width: " << RenderSystem::width << std::endl;
+		std::cout << "width: " << RenderSystem::width << std::endl;
 	}
 
 	if (_json.hasKey("height"))
 	{
 		RenderSystem::height = _json["height"].ToInt();
-		std::cout << "Found height: " << RenderSystem::height << std::endl;
+		std::cout << "height: " << RenderSystem::height << std::endl;
 	}
 
 	if (_json.hasKey("fullscreen"))
 	{
 		RenderSystem::fullscreen = _json["fullscreen"].ToBool();
-		std::cout << "Found fullscreen: " << RenderSystem::fullscreen << std::endl;
+		std::cout << "fullscreen: " << RenderSystem::fullscreen << std::endl;
 	}
 
 	//create a render window to be used based off the size in the settings
+	std::cout << "Creating a render window \n" << std::endl;
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
 
@@ -56,7 +57,7 @@ void RenderSystem::Initialize(json::JSON& _json)
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 
-	std::cout << "RenderSystem Initialized" << std::endl;
+	std::cout << "RenderSystem Initialized \n" << std::endl;
 }
 
 void RenderSystem::Destroy()
@@ -75,7 +76,7 @@ void RenderSystem::Update()
 
 	}
 	
-	std::cout << "Render System Update" << std::endl;
+	std::cout << "Render System Updated" << std::endl;
 }
 
 void RenderSystem::Load()

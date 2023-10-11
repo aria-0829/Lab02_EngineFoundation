@@ -3,17 +3,17 @@
 
 AssetManager::AssetManager()
 {
-	std::cout << "AssetManager Created" << std::endl;
+	std::cout << "AssetManager Created \n" << std::endl;
 }
 
 AssetManager::~AssetManager()
 {
-	std::cout << "AssetManager Destroyed" << std::endl;
+	std::cout << "AssetManager Destroyed \n" << std::endl;
 }
 
 void AssetManager::Initialize()
 {
-	std::cout << "AssetManager Initialized" << std::endl;
+	std::cout << "AssetManager Initialized \n" << std::endl;
 }
 
 void AssetManager::Destroy()

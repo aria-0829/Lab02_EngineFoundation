@@ -15,8 +15,6 @@ private:
 	AssetManager* assetManager = new AssetManager;
 	SceneManager* sceneManager = new SceneManager;
 
-	//std::string DefaultFile = "";
-
 public:
 	Engine();
 	~Engine();

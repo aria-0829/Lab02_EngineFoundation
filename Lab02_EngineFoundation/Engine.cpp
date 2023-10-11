@@ -5,12 +5,12 @@
 
 Engine::Engine()
 {
-	std::cout << "Engine Created" << std::endl;
+	std::cout << "Engine Created \n" << std::endl;
 }
 
 Engine::~Engine()
 {
-	std::cout << "Engine Destroyed" << std::endl;
+	std::cout << "Engine Destroyed \n" << std::endl;
 }
 
 void Engine::Initialize()
@@ -22,13 +22,13 @@ void Engine::Initialize()
 
 	if (document.hasKey("Engine"))
 	{
-		std::cout << "Found Engine..." << std::endl;
+		std::cout << "Found Engine:" << std::endl;
 		json::JSON engineSettings = document["Engine"];
 
 		if (engineSettings.hasKey("DefaultFile"))
 		{
 			std::string DefaultFile = engineSettings["DefaultFile"].ToString();
-			std::cout << "Found DefaultFile: " << DefaultFile << std::endl;
+			std::cout << "Found DefaultFile: " << DefaultFile << std::endl << std::endl;
 
 			//Load DefaultFile
 			std::ifstream levelStream(DefaultFile);
@@ -37,7 +37,7 @@ void Engine::Initialize()
 
 			if (levelFile.hasKey("SceneManager"))
 			{
-				std::cout << "Found SceneManager..." << std::endl;
+				std::cout << "Found SceneManager:" << std::endl;
 				json::JSON scenes = levelFile["SceneManager"];
 				
 				//sceneManager->Load(scenes);
@@ -47,11 +47,41 @@ void Engine::Initialize()
 					if (scene.hasKey("name"))
 					{
 						std::string sceneName = scene["name"].ToString();
-						std::cout << "Found Scene Name: " << sceneName << std::endl;
+						std::cout << "Scene Name: " << sceneName << std::endl << std::endl;
 					}
 					if (scene.hasKey("Entities"))
 					{
-						
+						std::cout << "Found Entities:" << std::endl;
+						json::JSON entities = scene["Entities"];
+
+						for (auto& entity : entities.ArrayRange())
+						{
+							if (entity.hasKey("Name"))
+							{
+								std::string entityName = entity["Name"].ToString();
+								std::cout << "Entity Name: " << entityName << std::endl << std::endl;
+							}
+							if (entity.hasKey("Components"))
+							{
+								std::cout << "Found Components:" << std::endl;
+								json::JSON components = entity["Components"];
+
+								for (auto& component : components.ArrayRange())
+								{
+									if (component.hasKey("className"))
+									{
+										std::string componentName = component["className"].ToString();
+										std::cout << "Component Name: " << componentName << std::endl;
+									}
+
+									if (component.hasKey("id"))
+									{
+										int componentID = component["id"].ToInt();
+										std::cout << "Component ID: " << componentID << std::endl << std::endl;
+									}
+								}
+							}
+						}
 					}
 				}
 			}

@@ -29,15 +29,25 @@ void SceneManager::Update()
 
 void SceneManager::AddScene(Scene* _scene)
 {
+	scenes.push_back(_scene);
+	std::cout << "Scene Added to SceneManager" << std::endl << std::endl;
 }
 
 void SceneManager::RemoveScene(Scene* _scene)
 {
+	scenes.remove(_scene);
+	std::cout << "Scene Removed from SceneManager" << std::endl;
 }
 
-void SceneManager::Load(json::JSON& _json)
+void SceneManager::Load(json::JSON& _sceneManagerData)
 {
 	//Load DefaultFile
+	for (auto& sceneData : _sceneManagerData.ArrayRange())
+	{
+		Scene* scene = new Scene();
+		scene->Load(sceneData);
+		AddScene(scene);
+	}
 
-	std::cout << "Loaded" << std::endl;
+	std::cout << "Scene Manager Data Load Complete." << std::endl << std::endl;
 }

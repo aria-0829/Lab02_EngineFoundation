@@ -14,30 +14,30 @@ RenderSystem::~RenderSystem()
 	std::cout << "RenderSystem Destroyed \n" << std::endl;
 }
 
-void RenderSystem::Initialize(json::JSON& _json)
+void RenderSystem::Initialize(json::JSON& _renderSystemSettings)
 {
 	//Load the appropriate data
-	if (_json.hasKey("Name"))
+	if (_renderSystemSettings.hasKey("Name"))
 	{
-		Name = _json["Name"].ToString();
+		Name = _renderSystemSettings["Name"].ToString();
 		std::cout << "Name: " << Name << std::endl;
 	}
 
-	if (_json.hasKey("width"))
+	if (_renderSystemSettings.hasKey("width"))
 	{
-		RenderSystem::width = _json["width"].ToInt();
+		RenderSystem::width = _renderSystemSettings["width"].ToInt();
 		std::cout << "width: " << RenderSystem::width << std::endl;
 	}
 
-	if (_json.hasKey("height"))
+	if (_renderSystemSettings.hasKey("height"))
 	{
-		RenderSystem::height = _json["height"].ToInt();
+		RenderSystem::height = _renderSystemSettings["height"].ToInt();
 		std::cout << "height: " << RenderSystem::height << std::endl;
 	}
 
-	if (_json.hasKey("fullscreen"))
+	if (_renderSystemSettings.hasKey("fullscreen"))
 	{
-		RenderSystem::fullscreen = _json["fullscreen"].ToBool();
+		RenderSystem::fullscreen = _renderSystemSettings["fullscreen"].ToBool();
 		std::cout << "fullscreen: " << RenderSystem::fullscreen << std::endl;
 	}
 

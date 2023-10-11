@@ -21,7 +21,7 @@ public:
 	void Update();
 	void AddScene(Scene* _scene);
 	void RemoveScene(Scene* _scene);
-	void Load(json::JSON& _json);
+	void Load(json::JSON& _sceneManagerData);
 };
 
 #endif // !_SCENEMANAGER_H_

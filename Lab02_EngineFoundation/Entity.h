@@ -5,6 +5,9 @@
 #include "Component.h"
 #include <list>
 #include <string>
+#include "json.hpp"
+#include <fstream>
+
 
 class Entity
 {
@@ -22,7 +25,7 @@ public:
 	void RemoveComponent(Component* _component);
 	void Update();
 	std::string& GetName();
-	void Load();
+	void Load(json::JSON& _entityData);
 };
 
 #endif // !_ENTITY_H_

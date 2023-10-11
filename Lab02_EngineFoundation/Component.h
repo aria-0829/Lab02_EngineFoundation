@@ -1,6 +1,8 @@
 #pragma once
 #ifndef _COMPONENT_H_
 #define	_COMPONENT_H_
+#include "json.hpp"
+#include <fstream>
 
 class Component
 {
@@ -15,7 +17,7 @@ public:
 	void Destroy();
 	int GetComponetId();
 	void Update();
-	void Load();
+	void Load(json::JSON& _componentData);
 };
 
 #endif // !_COMPONENT_H_

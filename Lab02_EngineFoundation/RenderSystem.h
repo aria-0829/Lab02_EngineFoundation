@@ -17,7 +17,7 @@ public:
 	RenderSystem();
 	~RenderSystem();
 
-	void Initialize(json::JSON& _json);
+	void Initialize(json::JSON& _renderSystemSettings);
 	void Destroy();
 	void Update();
 	void Load();

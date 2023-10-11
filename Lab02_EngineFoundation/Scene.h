@@ -4,6 +4,8 @@
 
 #include "Entity.h"
 #include <list>
+#include "json.hpp"
+#include <fstream>
 
 class Scene
 {
@@ -19,7 +21,7 @@ public:
 	void Update();
 	void AddEntity(Entity* _entity);
 	void RemoveEntity(Entity* _entity);
-	void Load();
+	void Load(json::JSON& _sceneData);
 };
 
 #endif // !_SCENE_H_

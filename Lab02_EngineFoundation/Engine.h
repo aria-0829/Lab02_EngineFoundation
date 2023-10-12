@@ -6,14 +6,16 @@
 #include "InputManager.h"
 #include "AssetManager.h"
 #include "SceneManager.h"
+#include "json.hpp"
+#include <fstream>
 
 class Engine
 {
 private:
-	RenderSystem* renderSystem = new RenderSystem();
-	InputManager* inputManager = new InputManager;
-	AssetManager* assetManager = new AssetManager;
-	SceneManager* sceneManager = new SceneManager;
+	RenderSystem* renderSystem = nullptr;
+	InputManager* inputManager = nullptr;
+	AssetManager* assetManager = nullptr;
+	SceneManager* sceneManager = nullptr;
 
 public:
 	Engine();

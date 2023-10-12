@@ -8,7 +8,6 @@
 #include "json.hpp"
 #include <fstream>
 
-
 class Entity
 {
 private:

@@ -1,16 +1,14 @@
 #include "Engine.h"
 #include <iostream>
-#include "json.hpp"
-#include <fstream>
 
 Engine::Engine()
 {
-	std::cout << "Engine Created \n" << std::endl;
+	std::cout << "Engine Created" << std::endl;
 }
 
 Engine::~Engine()
 {
-	std::cout << "Engine Destroyed \n" << std::endl;
+	std::cout << "Engine Destroyed" << std::endl << std::endl;
 }
 
 void Engine::Initialize()
@@ -22,12 +20,25 @@ void Engine::Initialize()
 
 	Load(documentData);
 
-	std::cout << "Engine Initialized \n" << std::endl;
+	sceneManager->Initialize();
+	assetManager->Initialize();
+	renderSystem->Initialize();
+	inputManager->Initialize();
+
+	std::cout << "Engine Initialized" << std::endl << std::endl;
 }
 
 void Engine::Destroy()
 {
-	std::cout << "Engine Destroy()" << std::endl;
+	inputManager->Destroy();
+	delete inputManager;
+	renderSystem->Destroy();
+	delete renderSystem;
+	assetManager->Destroy();
+	delete assetManager;
+	sceneManager->Destroy();
+	delete sceneManager;
+	std::cout << "Engine Destroyed" << std::endl;
 }
 
 void Engine::GameLoop()
@@ -35,14 +46,15 @@ void Engine::GameLoop()
 	std::cout << "GameLoop Begin" << std::endl;
 
 	for (int i = 0; i < 5; ++i) {
+		sceneManager->Update();
+		assetManager->Update();
 		renderSystem->Update();
+		inputManager->Update();
 	}
 }
 
 void Engine::Load(json::JSON& _documentData)
 {
-	renderSystem->Load(_documentData);
-
 	if (_documentData.hasKey("Engine"))
 	{
 		std::cout << "HasKey Engine..." << std::endl;
@@ -58,9 +70,17 @@ void Engine::Load(json::JSON& _documentData)
 			std::string levelStr((std::istreambuf_iterator<char>(levelStream)), std::istreambuf_iterator<char>());
 			json::JSON levelData = json::JSON::Load(levelStr);
 
+			sceneManager = new SceneManager();
 			sceneManager->Load(levelData);
 		}
 	}
+
+	assetManager = new AssetManager();
+	assetManager->Load();
+	renderSystem = new RenderSystem();
+	renderSystem->Load(_documentData);
+	inputManager = new InputManager();
+	inputManager->Load();
 	
-	std::cout << "Engine Load Complete" << std::endl;
+	std::cout << "Engine Load Complete." << std::endl << std::endl;
 }

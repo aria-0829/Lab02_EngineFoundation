@@ -1,23 +1,21 @@
 #include "RenderSystem.h"
 #include <iostream>
-//#include "json.hpp"
-//#include <fstream>
 #include "SDL.h"
 
 RenderSystem::RenderSystem()
 {
-	std::cout << "RenderSystem Created \n" << std::endl;
+	std::cout << "RenderSystem Created" << std::endl;
 }
 
 RenderSystem::~RenderSystem()
 {
-	std::cout << "RenderSystem Destroyed \n" << std::endl;
+	std::cout << "RenderSystem Deleted" << std::endl << std::endl;
 }
 
 void RenderSystem::Initialize()
 {
 	//Create a render window to be used based off the size in the settings
-	std::cout << "Creating a render window \n" << std::endl;
+	std::cout << "Creating a render window" << std::endl << std::endl;
 	SDL_Window* window = nullptr;
 	SDL_Renderer* renderer = nullptr;
 
@@ -32,12 +30,12 @@ void RenderSystem::Initialize()
 	SDL_DestroyWindow(window);
 	SDL_Quit();
 
-	std::cout << "RenderSystem Initialized \n" << std::endl;
+	std::cout << "RenderSystem Initialized" << std::endl << std::endl;
 }
 
 void RenderSystem::Destroy()
 {
-	std::cout << "Destroyed" << std::endl;
+	std::cout << "RenderSystem Destroyed" << std::endl;
 }
 
 void RenderSystem::Update()
@@ -86,5 +84,5 @@ void RenderSystem::Load(json::JSON& _documentData)
 		}
 	}
 
-	std::cout << "RenderSystem Load Complete" << std::endl;
+	std::cout << "RenderSystem Load Complete." << std::endl << std::endl;
 }

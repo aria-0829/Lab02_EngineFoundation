@@ -4,27 +4,38 @@
 
 SceneManager::SceneManager()
 {
-	std::cout << "SceneManager Created \n" << std::endl;
+	std::cout << "SceneManager Created" << std::endl;
 }
 
 SceneManager::~SceneManager()
 {
-	std::cout << "SceneManager Destroyed \n" << std::endl;
+	std::cout << "SceneManager Deleted" << std::endl << std::endl;
 }
 
 void SceneManager::Initialize()
 {
 	
-	std::cout << "SceneManager Initialized \n" << std::endl;
+	std::cout << "SceneManager Initialized" << std::endl << std::endl;
 }
 
 void SceneManager::Destroy()
 {
-	std::cout << "Destroyed" << std::endl;
+	for (auto& scene : scenes)
+	{
+		//RemoveScene(scene);
+		//scene->Destroy();
+		//delete scene;
+	}
+	std::cout << "SceneManager Destroyed" << std::endl;
 }
 
 void SceneManager::Update()
 {
+	for (auto& scene : scenes)
+	{
+		scene->Update();
+	}
+	std::cout << "SceneManager Updated" << std::endl;
 }
 
 void SceneManager::AddScene(Scene* _scene)
@@ -49,11 +60,10 @@ void SceneManager::Load(json::JSON& _levelData)
 		for (auto& sceneData : sceneManagerData.ArrayRange())
 		{
 			Scene* scene = new Scene();
-			scene->Load(sceneData);
 			AddScene(scene);
+			scene->Load(sceneData);
 		}
 	}
-	
 
 	std::cout << "Scene Manager Data Load Complete." << std::endl << std::endl;
 }

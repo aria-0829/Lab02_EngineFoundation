@@ -8,26 +8,27 @@ Component::Component()
 
 Component::~Component()
 {
-	std::cout << "Component Destroyed" << std::endl;
+	std::cout << "Component Deleted" << std::endl;
 }
 
 void Component::Initialize()
 {
-	std::cout << "Component Initialized" << std::endl;
+	std::cout << "Component Initialized" << std::endl << std::endl;
 }
 
 void Component::Destroy()
 {
-	std::cout << "Destroyed" << std::endl;
+	std::cout << "Component Destroyed" << std::endl;
 }
 
 int Component::GetComponetId()
 {
-	return 0;
+	return id;
 }
 
 void Component::Update()
 {
+	std::cout << "Component Updated" << std::endl;
 }
 
 void Component::Load(json::JSON& _componentData)
@@ -40,9 +41,11 @@ void Component::Load(json::JSON& _componentData)
 
 	if (_componentData.hasKey("id"))
 	{
-		int componentID = _componentData["id"].ToInt();
-		std::cout << "Component ID: " << componentID << std::endl;
+		id = _componentData["id"].ToInt();
+		std::cout << "Component ID: " << id << std::endl;
 	}
 
-	std::cout << "Component Loaded." << std::endl << std::endl;
+	std::cout << "Component Load Complete" << std::endl;
+
+	Initialize();
 }

@@ -8,17 +8,23 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	std::cout << "Entity Destroyed" << std::endl;
+	std::cout << "Entity Deleted" << std::endl;
 }
 
 void Entity::Initialize()
 {
-	std::cout << "Entity Initialized" << std::endl;
+	std::cout << "Entity Initialized" << std::endl << std::endl;
 }
 
 void Entity::Destroy()
 {
-	std::cout << "Destroyed" << std::endl;
+	for (auto& component : components)
+	{
+		RemoveComponent(component); 
+		component->Destroy();
+		delete component;
+	}
+	std::cout << "Entity Destroyed" << std::endl;
 }
 
 void Entity::AddComponent(Component* _component)
@@ -35,6 +41,11 @@ void Entity::RemoveComponent(Component* _component)
 
 void Entity::Update()
 {
+	for (auto& component : components)
+	{
+		component->Update();
+	}
+	std::cout << "Entity Updated" << std::endl;
 }
 
 std::string& Entity::GetName()
@@ -48,7 +59,6 @@ void Entity::Load(json::JSON& _entityData)
 	{
 		std::string entityName = _entityData["Name"].ToString();
 		std::cout << "Entity Name: " << entityName << std::endl << std::endl;
-
 	}
 	if (_entityData.hasKey("Components"))
 	{
@@ -58,9 +68,12 @@ void Entity::Load(json::JSON& _entityData)
 		for (auto& componentData : components.ArrayRange())
 		{
 			Component* component = new Component();
-			component->Load(componentData);
 			AddComponent(component);
+			component->Load(componentData);
 		}
 	}
-	std::cout << "Entity Data Load Complete." << std::endl;
+
+	std::cout << "Entity Data Load Complete" << std::endl;
+
+	Initialize();
 }

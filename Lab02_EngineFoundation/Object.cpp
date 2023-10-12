@@ -8,7 +8,7 @@ Object::Object()
 
 Object::~Object()
 {
-	std::cout << "Object Destroyed" << std::endl;
+	std::cout << "Object Deleted" << std::endl;
 }
 
 void Object::Initialize()
@@ -18,7 +18,7 @@ void Object::Initialize()
 
 void Object::Destroy()
 {
-	std::cout << "Destroyed" << std::endl;
+	std::cout << "Object Destroyed" << std::endl;
 }
 
 bool Object::IsInitialized()
@@ -28,5 +28,5 @@ bool Object::IsInitialized()
 
 void Object::Load()
 {
-	std::cout << "Loaded" << std::endl;
+	std::cout << "Object Load Complete" << std::endl;
 }

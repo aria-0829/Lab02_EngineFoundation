@@ -3,29 +3,30 @@
 
 InputManager::InputManager()
 {
-	std::cout << "InputManager Created \n" << std::endl;
+	std::cout << "InputManager Created" << std::endl;
 }
 
 InputManager::~InputManager()
 {
-	std::cout << "InputManager Destroyed \n" << std::endl;
+	std::cout << "InputManager Deleted" << std::endl << std::endl;
 }
 
 void InputManager::Initialize()
 {
-	std::cout << "InputManager Initialized \n" << std::endl;
+	std::cout << "InputManager Initialized" << std::endl << std::endl;
 }
 
 void InputManager::Destroy()
 {
-	std::cout << "Destroyed" << std::endl;
+	std::cout << "InputManager Destroyed" << std::endl;
 }
 
 void InputManager::Update()
 {
+	std::cout << "InputManager Updated" << std::endl << std::endl;
 }
 
 void InputManager::Load()
 {
-	std::cout << "Loaded" << std::endl;
+	std::cout << "InputManager Load Complete." << std::endl << std::endl;
 }

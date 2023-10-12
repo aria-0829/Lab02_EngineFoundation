@@ -9,8 +9,8 @@ class RenderSystem
 {
 private:
 	std::string Name = "";
-	float width = 0;
-	float height = 0;
+	int width = 0;
+	int height = 0;
 	bool fullscreen = false;
 
 public:

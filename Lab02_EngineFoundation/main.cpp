@@ -1,5 +1,4 @@
 #include "Engine.h"
-
 #include <iostream>
 #include "json.hpp"
 #include <fstream>
@@ -11,6 +10,7 @@ int main()
 	engine->Initialize();
 	engine->GameLoop();
 	engine->Destroy();
+	delete engine;
 
 	return 0;
 	

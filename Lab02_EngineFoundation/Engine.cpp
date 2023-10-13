@@ -8,7 +8,7 @@ Engine::Engine()
 
 Engine::~Engine()
 {
-	std::cout << "Engine Destroyed" << std::endl << std::endl;
+	std::cout << "Engine Deleted" << std::endl << std::endl;
 }
 
 void Engine::Initialize()
@@ -43,7 +43,7 @@ void Engine::Destroy()
 
 void Engine::GameLoop()
 {
-	std::cout << "GameLoop Begin" << std::endl;
+	std::cout << "GameLoop Begin" << std::endl << std::endl;
 
 	for (int i = 0; i < 5; ++i) {
 		sceneManager->Update();
@@ -57,7 +57,6 @@ void Engine::Load(json::JSON& _documentData)
 {
 	if (_documentData.hasKey("Engine"))
 	{
-		std::cout << "HasKey Engine..." << std::endl;
 		json::JSON engineSettings = _documentData["Engine"];
 
 		if (engineSettings.hasKey("DefaultFile"))

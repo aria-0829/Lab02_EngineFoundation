@@ -22,10 +22,11 @@ void SceneManager::Destroy()
 {
 	for (auto& scene : scenes)
 	{
-		//RemoveScene(scene);
-		//scene->Destroy();
-		//delete scene;
+		scene->Destroy();
+		delete scene;
 	}
+	scenes.clear();
+
 	std::cout << "SceneManager Destroyed" << std::endl;
 }
 
@@ -54,7 +55,6 @@ void SceneManager::Load(json::JSON& _levelData)
 {
 	if (_levelData.hasKey("SceneManager"))
 	{
-		std::cout << "HasKey SceneManager..." << std::endl;
 		json::JSON sceneManagerData = _levelData["SceneManager"];
 
 		for (auto& sceneData : sceneManagerData.ArrayRange())

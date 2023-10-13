@@ -13,17 +13,18 @@ Scene::~Scene()
 
 void Scene::Initialize()
 {
-	std::cout << "Scene Initialized" << std::endl;
+	std::cout << "Scene Initialized" << std::endl << std::endl;
 }
 
 void Scene::Destroy()
 {
 	for (auto& entity : entities)
 	{
-		RemoveEntity(entity);
 		entity->Destroy();
 		delete entity;
 	}
+	entities.clear();
+
 	std::cout << "Scene Destroyed" << std::endl;
 }
 
@@ -58,7 +59,6 @@ void Scene::Load(json::JSON& _sceneData)
 
 	if (_sceneData.hasKey("Entities"))
 	{
-		std::cout << "HasKey Entities..." << std::endl;
 		json::JSON entities = _sceneData["Entities"];
 
 		for (auto& entityData : entities.ArrayRange())

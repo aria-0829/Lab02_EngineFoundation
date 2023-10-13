@@ -20,10 +20,11 @@ void Entity::Destroy()
 {
 	for (auto& component : components)
 	{
-		RemoveComponent(component); 
 		component->Destroy();
 		delete component;
 	}
+	components.clear();
+
 	std::cout << "Entity Destroyed" << std::endl;
 }
 
@@ -62,7 +63,6 @@ void Entity::Load(json::JSON& _entityData)
 	}
 	if (_entityData.hasKey("Components"))
 	{
-		std::cout << "HasKey Components..." << std::endl;
 		json::JSON components = _entityData["Components"];
 
 		for (auto& componentData : components.ArrayRange())

@@ -56,7 +56,6 @@ void RenderSystem::Load(json::JSON& _documentData)
 {	
 	if (_documentData.hasKey("RenderSystem"))
 	{
-		std::cout << "HasKey RenderSystem: " << std::endl;
 		json::JSON renderSystemSettings = _documentData["RenderSystem"];
 
 		if (renderSystemSettings.hasKey("Name"))
